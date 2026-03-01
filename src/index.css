@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* ── Scroll-reveal animation (CSS only, works without JS IntersectionObserver) ── */
+@keyframes appear {
+    from {
+        opacity: 0;
+        scale: 0.5;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+.scroll-reveal {
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+/* ── Hero Button shimmer & fill ── */
+.hero-btn {
+    position: relative;
+    display: inline-block;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(6px);
+    text-decoration: none;
+    transition:
+        letter-spacing 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease,
+        transform 0.3s ease;
+}
+
+.hero-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    transition: left 0.65s ease;
+    z-index: 2;
+}
+
+.hero-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #ff6b35, #e74c3c);
+    border-radius: 50px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.hero-btn:hover::before {
+    left: 140%;
+}
+
+.hero-btn:hover::after {
+    transform: scaleX(1);
+}
+
+.hero-btn:hover {
+    letter-spacing: 4px;
+    border-color: #ff6b35;
+    box-shadow:
+        0 0 20px rgba(255, 107, 53, 0.6),
+        0 0 60px rgba(255, 107, 53, 0.3),
+        0 8px 30px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+}
+
+/* ── Nav link underline hover ── */
+.nav-link {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.nav-link::after {
+    content: '';
+    background-color: white;
+    position: absolute;
+    height: 1px;
+    width: 0%;
+    bottom: 0;
+    left: 0;
+    transition: width 0.2s ease-in;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* ── Pizza banner button (wave fill) ── */
+.pizza-btn {
+    position: relative;
+    display: inline-block;
+    margin-top: 2rem;
+    border: 2px solid white;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 13px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    text-decoration: none;
+    transition:
+        color 0.45s ease,
+        box-shadow 0.4s ease,
+        transform 0.3s ease;
+}
+
+.pizza-btn::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: -10%;
+    width: 120%;
+    height: 0%;
+    background: linear-gradient(135deg, #f39c12, #e74c3c);
+    border-radius: 50% 50% 0 0 / 30px;
+    transition: height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.pizza-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+    transform: skewX(-15deg);
+    transition: left 0.6s ease 0.1s;
+    z-index: 2;
+}
+
+.pizza-btn:hover::before {
+    height: 180%;
+}
+
+.pizza-btn:hover::after {
+    left: 140%;
+}
+
+.pizza-btn:hover {
+    color: #fff;
+    box-shadow:
+        0 0 25px rgba(243, 156, 18, 0.7),
+        0 8px 24px rgba(0, 0, 0, 0.35);
+    transform: translateY(-3px);
+    border-color: #f39c12;
+}
+
+/* ── Burger CTA button (neon pulse ring) ── */
+.burger-cta {
+    position: relative;
+    display: inline-block;
+    border: 2px solid white;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 13px 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    overflow: visible;
+    z-index: 1;
+    background: transparent;
+    text-decoration: none;
+    transition:
+        color 0.4s ease,
+        background 0.4s ease,
+        border-color 0.4s ease,
+        transform 0.3s ease,
+        box-shadow 0.4s ease;
+}
+
+.burger-cta::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    opacity: 0;
+    transform: scale(0.88);
+    transition:
+        opacity 0.4s ease,
+        transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+    z-index: -1;
+}
+
+.burger-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border-radius: 4px;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.burger-cta:hover::before {
+    opacity: 1;
+    transform: scale(1.18);
+}
+
+.burger-cta:hover::after {
+    transform: scaleY(1);
+}
+
+.burger-cta:hover {
+    color: #fff;
+    border-color: #e74c3c;
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 18px rgba(231, 76, 60, 0.7),
+        0 0 50px rgba(231, 76, 60, 0.3),
+        0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.burger-cta:active {
+    transform: translateY(0px) scale(0.97);
+}
+
+/* ── Footer link underline on hover ── */
+.footer-link {
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    text-decoration: none;
+    transition: color 0.25s ease, padding-left 0.25s ease;
+}
+
+.footer-link:hover {
+    color: #e74c3c;
+    padding-left: 4px;
+}
